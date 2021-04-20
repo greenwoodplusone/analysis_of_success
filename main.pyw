@@ -17,7 +17,7 @@ def main():
         # перебираем колонки через одну, так как 1ая - план сотрудника, 2-ая - факт,
         # выходит что каждый новый сотрудник начниается на нечетной колонке (1, 3, ...)
         for col in range(start_col, sheet.max_column, 2):
-            name_employee = remov_pass(sheet[1][col].value)
+            name_employee = Operation.remove_pass(sheet[1][col].value)
 
             # Добавляем сотрудника в словарь если его там нет
             if name_employee not in Employee.dict_employee:
@@ -43,15 +43,9 @@ def main():
                     Employee.dict_employee[name_employee].fact += fact
 
                 # Вычисление и запись успешности сотруднику
-                success_rate(Employee.dict_employee[name_employee], plan, fact)
+                Operation.success_rate(Employee.dict_employee[name_employee], plan, fact)
 
 # Вывод результата
 if __name__ == "__main__":
     main()
-    get_sorted_list (Employee.dict_employee)
-
-"""
-Убрать документирование для создания текстового файла с результатами анализа
-
-set_text_file(list)
-"""
+    Operation.get_sorted_list(Employee.dict_employee)
